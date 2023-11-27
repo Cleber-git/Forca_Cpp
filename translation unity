@@ -1,0 +1,16 @@
+													 TRANSLATION UNITY
+					
+					
+										Uma unidade de tradução de um arquivo .cpp, 
+								é um arquivo de código pré-processado para fazer a compilação. 
+									Esse arquivp é salvo em seu diretório com a extenção: .o.
+						Por ser um arquivo objeto. conhecido como unidade de tradução ou translation unity
+						
+						
+						
+						
+									 Como gerar uma translation unity por vez em um projeto
+									 
+									 
+		Apenas chamando o compilador "no meu caso o gcc/g++" passando o "-c" e logo em seguida dizendo qual arquivo	
+					você quer compilar usaando o nome dele. Ex: " gcc -c meu_arquivo.cpp".

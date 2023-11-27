@@ -1,0 +1,8 @@
+											Qual a importância de separar oos arquivos do projeto?
+											
+											
+							Quando separamos os arquivos em arquivos menores contendo funções agrupadas por escopo de usabilidade
+									Nós nos damos a capacidade de eficiência na manutenção do código e na compilação.
+							Quando fazemos a manutenção em um projeto monolítico, temos que compilar todo o código sem necessidade
+							fazendo com que o processo de compilação seja mais lento e que o compilador recompile partes que não
+														precisam, por não terem sido modificadas.					

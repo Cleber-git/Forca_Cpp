@@ -1,0 +1,7 @@
+													PRÉ-PROCESSAMENTO
+													
+													
+									Responsável por incluir os header files e bibliotecas que o código-fonte informa
+							fazer a retirada dos comentários do código já que ele é necesário apenas para o desenvolverdor
+							e não para a máquina, fazzer a substituição de macros, irrelevar espaços em branco e quebras de linha
+										Fazer o reconhecimento de diretivas condicionais entre outras mais específicas.
