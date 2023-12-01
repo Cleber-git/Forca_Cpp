@@ -1,6 +1,5 @@
-#include "forca.hpp"
-#include "read_string.hpp"
-#include "random_choice.hpp"
+#include "lib.hpp"
+
 
 
 
@@ -14,7 +13,14 @@ bool equal_number(int old_number, int current_number){
     return old_number == current_number; 
 }
 
+int random_choice(){
 
+    srand(time(NULL));
+    int secret_number = rand() % QTD;
+
+    
+    return secret_number;
+}
 
 bool cont(){
     
@@ -38,6 +44,7 @@ bool cont(){
 }
 
 
+
 void Is_valid(){
 
     for (char letra: NOME_SECRETO)
@@ -50,6 +57,8 @@ void Is_valid(){
             }
             
         }
+        
+        
     
 }
 
@@ -65,6 +74,7 @@ void Validation_of_information(char chute){
     {
         if(chute == letra){
             chutou[letra] = true;
+            interador++;
             break;
         }
     }
@@ -250,6 +260,7 @@ void chuta(){
     cout << endl;
     cin >> chute;
     Validation_of_information(chute);
+
 
 
     cout << endl;

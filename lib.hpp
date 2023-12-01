@@ -1,5 +1,5 @@
-#ifndef FORCA_HPP
-#define FORCA_HPP
+#ifndef _LIB_HPP
+#define _LIB_HPP
 
 #include <vector>
 #include <iostream>
@@ -23,9 +23,9 @@ int SIZE_SECRET_NAME = NOME_SECRETO.size();
 std::map<char, bool> chutou;
 std::vector<char> chutes_errados;
 std::vector<std::string> palavras;
+int interador;
 
-
-
+int random_choice();
 bool cont();
 void warning();
 void chuta();
@@ -42,5 +42,4 @@ void clear();
 void menu();
 void verify_add();
 void game_over();
-
 #endif

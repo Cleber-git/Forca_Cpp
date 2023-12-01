@@ -1,13 +1,12 @@
 
-#include "forca.hpp"
+#include "lib.hpp"
 #include "read_string.hpp"
 #include "lib.c++"
-#include "random_choice.hpp"
 
 // using namespace std;
 
 int main(){
-    
+
     welcome();
     read_string();
 
@@ -25,6 +24,24 @@ int main(){
         Is_valid();
 
         chuta();
+        
+        if(interador == 3){
+            if_champion(&ganhou);
+            Is_valid();
+            
+            cout << endl;
+            cout<< "Chute qual é a palavra secreta: ";
+            string s_palavra;
+            cin >> s_palavra;
+            interador = 0;
+            if( s_palavra == NOME_SECRETO ){
+                cout <<"================================================="<< endl; 
+                cout <<"|| PARABÉNS!! Você desvendou a palavra secreta ||"<< endl;
+                cout <<"================================================="<< endl;
+                cout << endl;
+                ganhou = true;
+            }
+        }
         if( !get_number_choices() ) nao_acertou = false;
         if_champion( &ganhou );
     }
