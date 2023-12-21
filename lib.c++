@@ -7,13 +7,13 @@
 
 using namespace std;
 
-bool ADD = false;
+
 
 bool equal_number(int old_number, int current_number){
     return old_number == current_number; 
 }
 
-int random_choice(){
+int random_choice(int QTD){
 
     srand(time(NULL));
     int secret_number = rand() % QTD;
@@ -22,7 +22,7 @@ int random_choice(){
     return secret_number;
 }
 
-bool cont(){
+bool cont(std::string NOME_SECRETO, std::map<char, bool> chutou, int SIZE_SECRET_NAME){
     
     int i = 0;
     for(char letra : NOME_SECRETO ){
@@ -45,7 +45,7 @@ bool cont(){
 
 
 
-void Is_valid(){
+void Is_valid(std::string NOME_SECRETO, std::map<char, bool> chutou){
 
     for (char letra: NOME_SECRETO)
         {
@@ -57,15 +57,14 @@ void Is_valid(){
             }
             
         }
-        
-        
+      
     
 }
 
 
 
 
-void Validation_of_information(char chute){
+void Validation_information(char chute, map<char, bool> *chutou, std::string NOME_SECRETO, int *interador){
 
     
 
@@ -73,8 +72,8 @@ void Validation_of_information(char chute){
     for ( char letra : NOME_SECRETO )
     {
         if(chute == letra){
-            chutou[letra] = true;
-            interador++;
+            (*chutou)[letra] = true;
+            (*interador)++;
             break;
         }
     }
@@ -102,13 +101,13 @@ void menu(){
 }
 
 
-bool get_number_choices(){
+bool get_number_choices(std::vector<char> chutes_errados){
     return chutes_errados.size() < 5;
 }
 
 
 
-void verify_add(){
+void verify_add(std::vector<std::string>*palavras, bool *ADD,  char ADICIONAR ,  char SAIR) {
 
     menu();
 
@@ -116,15 +115,15 @@ void verify_add(){
     cout << "Escolha o que quer fazer agora: ";
     cin >> chute;
 
-    switch(chute){
-        case ADICIONAR:
-            ADD = true;
-            break;
-        case SAIR:
+ //   switch(chute){
+//        case ADICIONAR:
+ //           (*ADD) = true;
+ //           break;
+ //       case SAIR:
             
-        default:
-            break;
-    }
+ //       default:
+//            break;
+    //}
     string new_add;
 
     if(ADD){
@@ -134,12 +133,12 @@ void verify_add(){
 
         cout << "Sua nova palavra: ";
         cin >> new_add;
-        palavras.push_back(new_add);
+        palavras->push_back(new_add);
 
 
-        file << palavras.size()<< endl;
+        file << palavras->size()<< endl;
 
-        for(string palavra : palavras){
+        for (string palavra : (*palavras)) {
             file << palavra << endl;
         }
         file.close();
@@ -154,9 +153,9 @@ void welcome(){
     cout << endl;
 }
 
-void if_champion( bool *ganhou){
+void if_champion( bool *ganhou, std::string NOME_SECRETO, map<char, bool> chutou, int SIZE_SECRET_NAME){
 
-    if(cont()){
+    if(cont(NOME_SECRETO, chutou, SIZE_SECRET_NAME)){
     
     cout <<"================================================="<< endl; 
     cout <<"|| PARABÉNS!! Você desvendou a palavra secreta ||"<< endl;
@@ -167,7 +166,7 @@ void if_champion( bool *ganhou){
     }
 }
 
-bool verify(char chute){
+bool verify(char chute, std::string NOME_SECRETO){
 
     for ( char letra : NOME_SECRETO )
     {
@@ -181,17 +180,17 @@ bool verify(char chute){
     return false;
 } 
 
-void add_choice_error( char chute){
-    if (!verify(chute))
+void add_choice_error(char chute, std::vector<char>*chutes_errados, std::string NOME_SECRETO ) {
+    if (!verify(chute, NOME_SECRETO))
     {
-        for(char letra : chutes_errados){
+        for (char letra : (*chutes_errados)) {
             if(letra == chute) return;
         }
-        chutes_errados.push_back(chute);
+        chutes_errados->push_back(chute);
     }
 }
 
-void show_choice_error(){
+void show_choice_error(std::vector<char> chutes_errados){
     if (chutes_errados.size() > 0)
         {
             cout << "Chutes Errados: ";
@@ -202,7 +201,7 @@ void show_choice_error(){
         }
 }
 
-void read_string(){
+std::string read_string(int QTD, int old_number, int current_number, std::vector<std::string>palavras, int *SIZE_SECRET_NAME, std::string *NOME_SECRETO){
     
     std::ifstream arquivo;
     arquivo.open("palavas.txt");
@@ -222,11 +221,11 @@ void read_string(){
 
     old_number = current_number;
     
-    int index = random_choice();
+    int index = random_choice(QTD);
     if (old_number == index)
     {   
         std::cout << "Indice se repetiu e está passando pelo tratamento"<< std::endl;
-        index = random_choice();
+        index = random_choice(QTD);
         current_number = index;
         
     }else{current_number = index;}
@@ -242,8 +241,8 @@ void read_string(){
     
     
 
-    NOME_SECRETO = palavras[current_number];
-    SIZE_SECRET_NAME = NOME_SECRETO.size();
+    (*NOME_SECRETO) = palavras[current_number];
+    (*SIZE_SECRET_NAME) = NOME_SECRETO->size();
    
 
 
@@ -252,21 +251,21 @@ void read_string(){
     //     cout << fruta << endl;
     // }
 
-    
+    return (*NOME_SECRETO);
 }
 
-void chuta(){
+void chuta(std::vector<char> *chutes_errados,std::map<char,bool>* chutou, std::string NOME_SECRETO, int* interador){
     char chute;
     cout << endl;
     cin >> chute;
-    Validation_of_information(chute);
+    Validation_information(chute, chutou, NOME_SECRETO, interador);
 
 
 
     cout << endl;
     
     
-    add_choice_error(chute);
+    add_choice_error(chute, chutes_errados, NOME_SECRETO);
 }
 
 
@@ -287,18 +286,18 @@ void warning(){
 
 void clear(){
 
-    old_number = 0;
-    current_number = 0;
-    QTD = 0;
-    SIZE_SECRET_NAME = 0;
-    NOME_SECRETO.clear();
-    chutou.clear();
-    chutes_errados.clear();
-    palavras.clear();
+//    old_number = 0;
+ //   current_number = 0;
+ //   QTD = 0;
+ //   SIZE_SECRET_NAME = 0;
+ //   NOME_SECRETO.clear();
+  //  chutou.clear();
+ //   chutes_errados.clear();
+  //  palavras.clear();
     
 }
 
-void game_over(){
+void game_over(std::string NOME_SECRETO){
     cout << "A palavra secreta era: " << NOME_SECRETO << endl;
     cout << "Fim de jogo!" << endl;
 }
