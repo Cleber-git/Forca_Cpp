@@ -22,7 +22,7 @@ void Validation_information(char chute, std::map<char, bool> *chutou, std::strin
 void Is_valid(std::string NOME_SECRETO, std::map<char, bool> chutou);
 bool verify(char chute, std::string NOME_SECRETO);
 bool equal_number(int old_number, int current_number);
-void clear();
+void clear(int old_number, int current_number, int QTD, int SIZE_SECRET_NAME, std::string* NOME_SECRETO, std::map<char, bool>* chutou, std::vector<char>* chutes_errados, std::vector<std::string>* palavras);
 void menu();
 void verify_add(std::vector<std::string>* palavras, bool* ADD, const char ADICIONAR, const char SAIR);
 void game_over(std::string NOME_SECRETO);

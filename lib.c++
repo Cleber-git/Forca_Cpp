@@ -284,16 +284,15 @@ void warning(){
 
 }
 
-void clear(){
+void clear(int old_number, int current_number, int QTD, int SIZE_SECRET_NAME, std::string* NOME_SECRETO, std::map<char, bool>* chutou, std::vector<char>* chutes_errados, std::vector<std::string>* palavras){
 
-//    old_number = 0;
- //   current_number = 0;
- //   QTD = 0;
- //   SIZE_SECRET_NAME = 0;
- //   NOME_SECRETO.clear();
-  //  chutou.clear();
- //   chutes_errados.clear();
-  //  palavras.clear();
+    old_number = 0;
+    current_number = 0;
+    SIZE_SECRET_NAME = 0;
+    NOME_SECRETO->clear();
+    chutou->clear();
+    chutes_errados->clear();
+    palavras->clear();
     
 }
 

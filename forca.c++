@@ -11,7 +11,7 @@ std::string NOME_SECRETO;
 int main(){
     bool ADD = false;
     int interador = 0;
-    int QTD = 0;
+    int QTD = 1;
     int old_number=0;
     int current_number = 0;
     int SIZE_SECRET_NAME = NOME_SECRETO.size();
@@ -67,6 +67,6 @@ int main(){
     
     game_over(NOME_SECRETO);
     verify_add(&palavras, &ADD, ADICIONAR, SAIR );
-    clear();
+    clear(old_number, current_number, QTD, SIZE_SECRET_NAME, &NOME_SECRETO, &chutou, &chutes_errados, &palavras);
 
 }
