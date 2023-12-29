@@ -3,12 +3,11 @@
 #include "read_string.hpp"
 
 using namespace std;
-const char ADICIONAR = '+';
-const char SAIR = 'q' || 'Q';
-std::string NOME_SECRETO;
+static std::string NOME_SECRETO;
 
 
 int main(){
+
     bool ADD = false;
     int interador = 0;
     int QTD = 1;
@@ -20,7 +19,7 @@ int main(){
     std::vector<std::string> palavras;
 
     welcome();
-    read_string(&QTD, &old_number, &current_number, &palavras, &NOME_SECRETO, &SIZE_SECRET_NAME);
+    read_string(QTD, old_number, current_number, palavras, NOME_SECRETO, SIZE_SECRET_NAME);
 
     cout << endl;
     cout << endl;
@@ -35,10 +34,10 @@ int main(){
         
         Is_valid(NOME_SECRETO, chutou);
 
-        chuta(&chutes_errados, &chutou, NOME_SECRETO, &interador);
+        chuta(chutes_errados, chutou, NOME_SECRETO, interador);
         
-        if(interador == 3){
-            if_champion(&ganhou, NOME_SECRETO, chutou, SIZE_SECRET_NAME);
+        if( interador == 3 ){
+            if_champion(ganhou, NOME_SECRETO, chutou, SIZE_SECRET_NAME);
             Is_valid(NOME_SECRETO, chutou);
             
             cout << endl;
@@ -55,7 +54,7 @@ int main(){
             }
         }
         if( !get_number_choices(chutes_errados) ) nao_acertou = false;
-        if_champion( &ganhou, NOME_SECRETO, chutou, SIZE_SECRET_NAME);
+        if_champion( ganhou, NOME_SECRETO, chutou, SIZE_SECRET_NAME);
     }
     
 
@@ -66,7 +65,7 @@ int main(){
     }
     
     game_over(NOME_SECRETO);
-    verify_add(&palavras, &ADD, ADICIONAR, SAIR );
-    clear(old_number, current_number, QTD, SIZE_SECRET_NAME, &NOME_SECRETO, &chutou, &chutes_errados, &palavras);
+    verify_add(palavras, ADD );
+    clear(old_number, current_number, QTD, SIZE_SECRET_NAME, NOME_SECRETO, chutou, chutes_errados, palavras);
 
 }
