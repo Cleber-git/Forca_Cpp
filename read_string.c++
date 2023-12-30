@@ -29,11 +29,11 @@ std::string read_string(int &QTD, int &old_number, int &current_number, std::vec
 
     old_number = current_number;
     
-    int index = random_choice(QTD);
+    int index = lib::random_choice(QTD);
     if (old_number == index)
     {   
         std::cout << "Indice se repetiu e está passando pelo tratamento"<< std::endl;
-        index = random_choice(QTD);
+        index = lib::random_choice(QTD);
         current_number = index;
         
     }else{ current_number = index;}
