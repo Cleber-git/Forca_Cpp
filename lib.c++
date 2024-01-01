@@ -17,7 +17,7 @@ namespace lib {
         return secret_number;
     }
 
-    bool   cont(std::string NOME_SECRETO, std::map<char, bool> &chutou, int SIZE_SECRET_NAME) {
+    bool cont(std::string NOME_SECRETO, std::map<char, bool> &chutou, int SIZE_SECRET_NAME) {
 
         int i = 0;
         for (char letra: NOME_SECRETO) {
@@ -32,7 +32,7 @@ namespace lib {
         return false;
     }
 
-    void   Is_valid(const std::string NOME_SECRETO, const std::map<char, bool> &chutou) {
+    void Is_valid(const std::string NOME_SECRETO, const std::map<char, bool> &chutou) {
 
         for (char letra: NOME_SECRETO) {
             if (chutou.find(letra) == chutou.end() || !chutou.at(letra)) {
@@ -46,7 +46,7 @@ namespace lib {
 
     }
 
-    void   Validation_information(const char chute, map<char, bool> &chutou, const std::string NOME_SECRETO, int &interador) {
+    void Validation_information(const char chute, map<char, bool> &chutou, const std::string NOME_SECRETO, int &interador) {
 
         for (char letra: NOME_SECRETO) {
             if (chute == letra) {
@@ -55,10 +55,9 @@ namespace lib {
                 break;
             }
         }
-
     }
 
-    void   menu() {
+    void menu() {
 
         cout << endl;
         cout << endl;
@@ -78,12 +77,12 @@ namespace lib {
     }
 
 
-    bool   get_number_choices(std::vector<char> &chutes_errados) {
-        return chutes_errados.size() < 5;
+    bool get_number_choices(std::array<char, 5> &chutes_errados) {
+        return chutes_errados.size() <= 5;
     }
 
 
-    void   verify_add(std::vector<std::string> &palavras, bool &ADD) {
+    void verify_add(std::vector<std::string> &palavras, bool &ADD) {
 
           menu();
 
@@ -122,14 +121,14 @@ namespace lib {
 
     }
 
-    void   welcome() {
+    void welcome() {
         cout << "==================================================" << endl;
         cout << "||            BEM VINDO AO MEU MUNDO            ||" << endl;
         cout << "==================================================" << endl;
         cout << endl;
     }
 
-    void   if_champion(bool &ganhou, std::string NOME_SECRETO, map<char, bool> &chutou, int SIZE_SECRET_NAME) {
+    void if_champion(bool &ganhou, std::string NOME_SECRETO, map<char, bool> &chutou, int SIZE_SECRET_NAME) {
 
         if (  cont(NOME_SECRETO, chutou, SIZE_SECRET_NAME)) {
 
@@ -142,7 +141,7 @@ namespace lib {
         }
     }
 
-    bool   verify(char chute, std::string NOME_SECRETO) {
+    bool verify(char chute, std::string NOME_SECRETO) {
 
         for (char letra: NOME_SECRETO) {
 
@@ -154,16 +153,36 @@ namespace lib {
         return false;
     }
 
-    void   add_choice_error(char chute, std::vector<char> &chutes_errados, std::string NOME_SECRETO) {
-        if (!  verify(chute, NOME_SECRETO)) {
+    void add_choice_error( int array_c ,char chute, std::array<char, 5> &chutes_errados, std::string NOME_SECRETO ) {
+
+        for(int i = 0; i < chutes_errados.size() ;  i++){
+            if(chutes_errados[i] != 0) {
+                array_c++;
+            }
+        }
+
+        if (!verify(chute, NOME_SECRETO)) {
             for (char letra: chutes_errados) {
                 if (letra == chute) return;
             }
-            chutes_errados.push_back(chute);
+            chutes_errados[array_c] = chute;
+
         }
     }
 
-    void   show_choice_error(std::vector<char> &chutes_errados) {
+    bool verify_array( std::array<char, 5> &chutes_errados){
+        int j = 0;
+        for(int i = 0; i < chutes_errados.size(); i++ ){
+            if(chutes_errados[i] != 0){
+                j++;
+            }
+        }
+        if(j == 0){ return true;}else{return false;}
+
+    }
+
+    void show_choice_error(std::array<char, 5> &chutes_errados) {
+        if (verify_array(chutes_errados)) return;
         if (chutes_errados.size() > 0) {
             cout << "Chutes Errados: ";
             for (char erros: chutes_errados) {
@@ -174,18 +193,18 @@ namespace lib {
     }
 
 
-    void   chuta(std::vector<char> &chutes_errados, std::map<char, bool> &chutou, std::string NOME_SECRETO, int &interador) {
+    void chuta( int array_c ,std::array<char, 5> &chutes_errados, std::map<char, bool> &chutou, std::string NOME_SECRETO, int &interador) {
         char chute;
         cout << endl;
         cin >> chute;
-          Validation_information(chute, chutou, NOME_SECRETO, interador);
+        Validation_information(chute, chutou, NOME_SECRETO, interador);
 
         cout << endl;
 
-          add_choice_error(chute, chutes_errados, NOME_SECRETO);
+        add_choice_error( array_c ,chute, chutes_errados, NOME_SECRETO);
     }
 
-    void   warning() {
+    void warning() {
 
         cout << "--------------------------------------------------------" << endl;
         cout << "  Você terá 5 vidas. Boa sorte e que os jogos comecem!  " << endl;
@@ -193,20 +212,22 @@ namespace lib {
 
     }
 
-    void   clear(int old_number, int current_number, int QTD, int SIZE_SECRET_NAME, std::string &NOME_SECRETO,
-               std::map<char, bool> &chutou, std::vector<char> &chutes_errados, std::vector<std::string> &palavras) {
+    void clear(int old_number, int current_number, int QTD, int SIZE_SECRET_NAME, std::string &NOME_SECRETO,
+               std::map<char, bool> &chutou, std::array<char, 5> &chutes_errados, std::vector<std::string> &palavras) {
 
         old_number = 0;
         current_number = 0;
         SIZE_SECRET_NAME = 0;
         NOME_SECRETO.clear();
         chutou.clear();
-        chutes_errados.clear();
         palavras.clear();
+        for (int i = 0; i < chutes_errados.size(); ++i) {
+            chutes_errados[i] = ' ';
 
+        }
     }
 
-    void   game_over(const std::string NOME_SECRETO) {
+    void game_over(const std::string NOME_SECRETO) {
         cout << "A palavra secreta era: " << NOME_SECRETO << endl;
         cout << "Fim de jogo!" << endl;
     }
