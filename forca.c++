@@ -17,7 +17,7 @@ int main(){
     int current_number = 0;
     int SIZE_SECRET_NAME = NOME_SECRETO.size();
     std::map<char, bool> chutou;
-    std::array<char, 5> chutes_errados={0};
+    std::array<char, 6> chutes_errados={0};
     int array_c = 0;
     std::vector<std::string> palavras;
 
